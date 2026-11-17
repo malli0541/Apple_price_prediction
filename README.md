@@ -5,22 +5,24 @@ prediction using Linear Regression, Random Forest, and XGBoost.
 
 ---
 
-## ⚠️ Important – Deployment Platform
+## 🚀 Deploy to Vercel
 
-**Vercel does NOT support Streamlit.**  
-Vercel is for static sites and serverless functions only.
+The project exposes a Streamlit ASGI application for Vercel's Python runtime.
+Set the Vercel project root to this folder and deploy with the default settings.
+The deployment uses Python 3.12, as required by the TensorFlow version range.
 
-✅ **Use Streamlit Community Cloud** (free, purpose-built for Streamlit):
-👉 https://share.streamlit.io
-
----
+Streamlit uses WebSockets for interactive sessions, so Fluid Compute must be
+enabled. TensorFlow also exceeds Vercel's standard Python function bundle size;
+for an existing Vercel project, add the environment variable
+`VERCEL_SUPPORT_LARGE_FUNCTIONS=1` in Project Settings and redeploy. Large
+Functions are in beta and require an eligible Vercel project.
 
 ## 🚀 Deploy to Streamlit Community Cloud
 
-1. Push this folder to a **public GitHub repository**.
+1. Push this folder to a public GitHub repository.
 2. Go to https://share.streamlit.io and sign in with GitHub.
 3. Click **"New app"** → select your repo → set **Main file path** to `app.py`.
-4. Click **Deploy** – done!
+4. Click **Deploy**.
 
 ---
 
@@ -28,7 +30,8 @@ Vercel is for static sites and serverless functions only.
 
 ```
 answer/
-├── app.py                  ← Streamlit application
+├── app.py                  ← ASGI entrypoint for deployment
+├── streamlit_ui.py         ← Streamlit application
 ├── requirements.txt        ← Python dependencies
 ├── P721 DATASET.csv        ← Apple stock data (2012–2019)
 └── .streamlit/
